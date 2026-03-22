@@ -1,22 +1,26 @@
 ---
+import BaseLayout from '@/layouts/BaseLayout.astro';
 import ProfileSection from '@/components/sections/ProfileSection.astro';
-import MainFeed from '@/components/sections/MainFeed.astro';
+import CapstoneFeed from '@/components/sections/CapstoneFeed.astro';
+import CapstoneExperienceSection from '@/components/sections/CapstoneExperienceSection.astro';
 import WritingSection from '@/components/sections/WritingSection.astro';
-import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="sokmontrey.me">
+<BaseLayout title="Capstone | sokmontrey.me">
 	<main class="mx-auto max-w-[96rem] px-8 py-12 md:px-16 md:py-24 grid grid-cols-1 md:grid-cols-[1fr_2fr] xl:grid-cols-[1fr_2fr_1.3fr] gap-12 md:gap-16">
 		<aside class="md:sticky md:top-20 md:self-start">
 			<ProfileSection />
 		</aside>
 
 		<section>
-			<MainFeed />
+			<CapstoneFeed />
 		</section>
 
 		<section class="md:col-start-2 xl:col-start-3 xl:row-start-1">
-			<WritingSection />
+			<div class="space-y-14">
+				<CapstoneExperienceSection />
+				<WritingSection />
+			</div>
 		</section>
 	</main>
 </BaseLayout>

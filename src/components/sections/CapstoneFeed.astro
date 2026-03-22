@@ -1,0 +1,179 @@
+---
+import { getCollection } from 'astro:content';
+import { capstoneProject } from '@/data/capstone';
+
+const projects = await getCollection('projects');
+const leaderDots = '. '.repeat(600).trim();
+const leaderArrows = '> '.repeat(600).trim();
+
+const capstoneProjectSlugs = [
+	'glossplusone',
+	'visionr',
+	'pointr-graph-editor',
+	'nodeflow',
+	'non-subkernel-convolution',
+];
+
+const capstoneProjectDetails: Record<string, string> = {
+	glossplusone:
+		'Positioned as a polished product prototype, this project highlights applied LLM integration, browser extension architecture, and thoughtful UX decisions for real-world language learning workflows.',
+	visionr:
+		'This project demonstrates accessibility-centered problem solving by combining computer vision, low-latency streaming, and spatial audio feedback into a working assistive navigation concept.',
+	'pointr-graph-editor':
+		'The editor emphasizes interaction design and state management, with floor-plan overlays, graph editing, export flows, and undo/redo mechanics built around a command-based architecture.',
+	nodeflow:
+		'Nodeflow showcases lower-level engineering through custom graph execution, reverse-mode automatic differentiation, optimization passes, and a design aimed at extensibility for future ML experimentation.',
+	'non-subkernel-convolution':
+		'This research-oriented project focuses on experimentation and quantitative evaluation, using a custom convolution approach to reduce model parameters while preserving competitive results.',
+};
+
+const projectMap = new Map(projects.map((project) => [project.slug, project]));
+const selectedProjects = capstoneProjectSlugs
+	.map((slug) => projectMap.get(slug))
+	.filter(Boolean);
+
+---
+
+<div class="space-y-14">
+	<section class="space-y-5">
+		<header class="flex items-end gap-3">
+			<h2 class="font-sans text-sm font-medium tracking-widest uppercase text-[#EED9B4]">Projects</h2>
+			<a href="/projects" class="leader-link font-mono text-xs text-[#A59F97] hover:text-[#d6c6a5] transition-colors flex-1 min-w-0 flex items-end gap-2 cursor-pointer">
+				<span aria-hidden="true" class="leader-switch">
+					<span class="leader-dots">{leaderDots}</span>
+					<span class="leader-arrows">{leaderArrows}</span>
+				</span>
+				<span class="shrink-0">see all projects</span>
+			</a>
+		</header>
+
+		<div class="space-y-8">
+			<article class="rounded-sm bg-[#131920] p-5 space-y-5 group">
+				<div class="space-y-3">
+					<p class="font-mono text-[11px] uppercase tracking-[0.16em] text-[#baa67f]">{capstoneProject.status}</p>
+					<h3 class="font-serif text-[2rem] sm:text-[2.7rem] leading-[0.95] tracking-[-0.01em] text-[#EED9B4] group-hover:text-[#F5E8C4] transition-colors max-w-4xl">
+						<a href={`/capstone/${capstoneProject.slug}`} class="inline-block hover:text-[#fff3d6] transition-colors">
+								{capstoneProject.title}
+							</a>
+					</h3>
+					<p class="font-mono text-[11px] uppercase tracking-[0.16em] text-[#A59F97] break-words max-w-full">
+						{capstoneProject.meta.join(' / ')}
+					</p>
+				</div>
+
+				<p class="font-sans text-[15px] leading-relaxed text-[#C1B7A6] text-justify">
+					{capstoneProject.description}
+				</p>
+
+				<p class="font-sans text-[15px] leading-relaxed text-[#A59F97] text-justify">
+					{capstoneProject.details}
+				</p>
+
+				<ul class="grid gap-3 text-sm text-[#A59F97] sm:grid-cols-2">
+					{capstoneProject.highlights.map((item) => (
+						<li class="rounded-sm bg-[#10161d] px-3 py-3 leading-relaxed break-words">
+							{item}
+						</li>
+					))}
+				</ul>
+
+				<p class="font-sans text-[14px] leading-relaxed text-[#8f99a6] text-justify">
+					{capstoneProject.nextSteps}
+				</p>
+
+				<div class="flex items-center gap-x-4 gap-y-2 pt-1 text-sm flex-wrap">
+					<a href={`/capstone/${capstoneProject.slug}`} class="text-[#c3b493] hover:text-[#f0e5cf] transition-colors">
+						View project details
+					</a>
+					<a href="/capstone-docs/portfolio-development-assignment.pdf" target="_blank" rel="noopener noreferrer" class="text-[#8f99a6] hover:text-[#c3b493] transition-colors">
+						Open assignment brief
+					</a>
+				</div>
+			</article>
+
+			{selectedProjects.map((project) => (
+				<article class="rounded-sm bg-[#12181f] p-5 space-y-4 group">
+					<div class:list={[
+						'grid gap-4 items-start',
+						project.data.image ? 'sm:grid-cols-[4rem_1fr]' : undefined,
+					]}>
+						{project.data.image && (
+							<div class="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 bg-[#161A20] rounded-sm overflow-hidden border border-[#1E242C] group-hover:border-[#2A3340] transition-colors">
+								<img src={project.data.image} alt={project.data.title} class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+							</div>
+						)}
+
+						<div class="space-y-3 min-w-0">
+							<p class="font-mono text-[11px] uppercase tracking-[0.16em] text-[#7f8893]">
+								{project.data.date.getFullYear()}
+							</p>
+							<h3 class="font-serif text-[1.55rem] leading-none text-[#EED9B4] group-hover:text-[#F5E8C4] transition-colors">
+								<a href={`/projects/${project.slug}`}>{project.data.title}</a>
+							</h3>
+							<p class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#baa67f] leading-relaxed break-words">
+								{project.data.technologies.slice(0, 4).join(' / ')}
+							</p>
+
+							<p class="font-sans text-[15px] leading-relaxed text-[#C1B7A6] text-justify">
+								{project.data.description}
+							</p>
+
+							<p class="font-sans text-[15px] leading-relaxed text-[#A59F97] text-justify">
+								{capstoneProjectDetails[project.slug] ?? project.data.description}
+							</p>
+
+							<div class="flex items-center gap-x-4 gap-y-2 pt-1 text-sm flex-wrap">
+								<a href={`/projects/${project.slug}`} class="text-[#c3b493] hover:text-[#f0e5cf] transition-colors">
+									View project
+								</a>
+								{project.data.githubUrl && (
+									<a href={project.data.githubUrl} target="_blank" rel="noopener noreferrer" class="text-[#8f99a6] hover:text-[#c3b493] transition-colors">
+										GitHub
+									</a>
+								)}
+								{project.data.liveUrl && (
+									<a href={project.data.liveUrl} target="_blank" rel="noopener noreferrer" class="text-[#8f99a6] hover:text-[#c3b493] transition-colors">
+										Live
+									</a>
+								)}
+							</div>
+						</div>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
+</div>
+
+<style>
+	.leader-switch {
+		position: relative;
+		flex: 1 1 auto;
+		min-width: 0;
+		overflow: hidden;
+		height: 1em;
+		font-family: 'EB Garamond', serif;
+		font-size: 1.05rem;
+		line-height: 1;
+		color: rgb(107 101 87 / 0.9);
+	}
+
+	.leader-switch > span {
+		position: absolute;
+		inset: 0;
+		white-space: nowrap;
+		transition: opacity 180ms ease;
+	}
+
+	.leader-arrows {
+		opacity: 0;
+	}
+
+	.leader-link:hover .leader-dots {
+		opacity: 0;
+	}
+
+	.leader-link:hover .leader-arrows {
+		opacity: 1;
+	}
+</style>
