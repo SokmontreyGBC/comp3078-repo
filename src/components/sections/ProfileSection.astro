@@ -1,8 +1,7 @@
 ---
 import { Github, Linkedin, Instagram, Mail } from "lucide-astro";
 import links from "@/data/links.json";
-import bioData from "@/data/bio.json";
-import ChevronNavLink from "@/components/nav/ChevronNavLink.astro";
+import AboutBioContent from "@/components/sections/AboutBioContent.astro";
 
 const iconClass = "w-5 h-5";
 ---
@@ -14,9 +13,26 @@ const iconClass = "w-5 h-5";
     </h1>
 
     {/* Bio */}
-    <div class="text-sm text-[#A59F97] leading-relaxed space-y-3">
-      <p>{bioData.bio}</p>
-      <ChevronNavLink href="/about" label="more about me" class="text-xs" />
+    <div class="space-y-4">
+      <AboutBioContent />
+      <p class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#8f99a6]">
+        <a
+          href="/resume.pdf"
+          class="text-[#c3b493] underline underline-offset-2 hover:text-[#f0e5cf] transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Resume (PDF)
+        </a>
+        <a
+          href="/cover-letter.pdf"
+          class="text-[#c3b493] underline underline-offset-2 hover:text-[#f0e5cf] transition-colors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Cover letter (PDF)
+        </a>
+      </p>
     </div>
 
     {/* Links */}

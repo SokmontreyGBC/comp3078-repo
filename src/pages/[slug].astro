@@ -14,7 +14,7 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 
 if (slug !== capstoneProject.slug) {
-	return Astro.redirect('/capstone');
+	return Astro.redirect('/');
 }
 ---
 
@@ -22,11 +22,11 @@ if (slug !== capstoneProject.slug) {
 	<a href="/" class="fixed top-5 left-6 font-sans text-base text-[#A59F97] hover:text-[#EED9B4] transition-colors opacity-50 hover:opacity-100">Sokmontrey</a>
 	<main class="mx-auto max-w-4xl px-8 py-16 lg:px-12 lg:py-24">
 		<a
-			href="/capstone"
+			href="/"
 			class="mb-8 inline-flex items-center gap-1.5 text-sm text-[#c3b493] hover:text-[#f0e5cf] transition-colors"
 		>
 			<ChevronLeft class="h-4 w-4" />
-			<span>Back to capstone</span>
+			<span>Back to home</span>
 		</a>
 
 		<header class="space-y-4">

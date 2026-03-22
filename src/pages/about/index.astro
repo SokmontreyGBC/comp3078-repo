@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AboutBioContent from "@/components/sections/AboutBioContent.astro";
 import { ChevronLeft } from "lucide-astro";
 ---
 
@@ -18,34 +19,8 @@ import { ChevronLeft } from "lucide-astro";
       Hi, I&apos;m Sokmontrey
     </h1>
 
-    <div
-      class="mt-6 space-y-6 text-sm text-[#A59F97] leading-relaxed border-separate border-spacing-y-1"
-    >
-      <p>
-        From <span class="text-[#EED9B4]">software</span> to <span
-          class="text-[#EED9B4]">robots</span
-        >, to <span class="text-[#EED9B4]">data and AI</span>, to <span
-          class="text-[#EED9B4]">community and art</span
-        >, I <span class="text-[#EED9B4]">make things</span> and <span
-          class="text-[#EED9B4]">tell the story</span
-        > along the way.
-      </p>
-
-      <p>
-        Currently, I run the GBP Computer Science Club with the goal of building
-        an environment where <span class="text-[#EED9B4]">idea and initiative</span>
-        form without border.
-      </p>
-
-      <p>
-        One of its most ambitious projects to date is <span
-          class="text-[#EED9B4]">HuskyHack</span
-        >, a hackathon
-        bringing together 150+ talented individuals to work on projects in under 24h,
-        forming teams that continue to make <span class="text-[#EED9B4]"
-          >impacts</span
-        > beyond the competition.
-      </p>
+    <div class="mt-6">
+      <AboutBioContent />
     </div>
   </main>
 </BaseLayout>
